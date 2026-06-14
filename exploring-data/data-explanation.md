@@ -56,7 +56,7 @@ Data obtained from the ERA5 reanalysis dataset provided by the Climate Data Stor
 __________________________________________________________________________________________________________________________________________
 
 
-# 3. ELECTRICITY-PRICE-JULY-SEPTEMBER-2022
+# 3. ELECTRICITY-PRICE-JULY-SEPTEMBER-2022 DATASET
 ## About the dataset
 
 This dataset contains hourly electricity market prices for Germany during 2022. The data includes electricity prices expressed in EUR/MWh, together with timestamps in both UTC and local time.
