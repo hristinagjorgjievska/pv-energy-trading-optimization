@@ -23,6 +23,8 @@ From January 1, 2022 to December 31, 2022, with hourly observations.
 
 Data generated using the PVGIS (Photovoltaic Geographical Information System) platform.
 
+__________________________________________________________________________________________________________________________________________
+
 
 # 2. ERA-5-GERMANY-JULY-SEPTEMBER-2022 DATASET
 ## About the dataset
@@ -50,6 +52,8 @@ The dataset contains hourly observations collected from July to September 2022.
 ### Source
 
 Data obtained from the ERA5 reanalysis dataset provided by the Climate Data Store.
+
+__________________________________________________________________________________________________________________________________________
 
 
 # 3. ELECTRICITY-PRICE-JULY-SEPTEMBER-2022
