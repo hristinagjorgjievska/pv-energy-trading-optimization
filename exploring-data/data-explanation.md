@@ -24,7 +24,7 @@ From January 1, 2022 to December 31, 2022, with hourly observations.
 Data generated using the PVGIS (Photovoltaic Geographical Information System) platform.
 
 
-# 1. ERA-5-GERMANY-JULY-SEPTEMBER-2022 DATASET
+# 2. ERA-5-GERMANY-JULY-SEPTEMBER-2022 DATASET
 ## About the dataset
 
 This dataset contains hourly weather data for Germany in 2022 obtained from the ERA5 reanalysis dataset. The data includes temperature, wind, cloud cover, precipitation, and solar radiation measurements.
@@ -50,3 +50,27 @@ The dataset contains hourly observations collected from July to September 2022.
 ### Source
 
 Data obtained from the ERA5 reanalysis dataset provided by the Climate Data Store.
+
+
+# 3. ELECTRICITY-PRICE-JULY-SEPTEMBER-2022
+## About the dataset
+
+This dataset contains hourly electricity market prices for Germany during 2022. The data includes electricity prices expressed in EUR/MWh, together with timestamps in both UTC and local time.
+
+Each row represents one hour of observations and can be used for electricity price analysis, forecasting, and energy market research.
+
+### Features
+
+- `Country` - country name
+- `ISO3 Code` - ISO 3-letter country code
+- `Datetime (UTC)` - timestamp in Coordinated Universal Time (UTC)
+- `Datetime (Local)` - timestamp in local German time
+- `Price (EUR/MWhe)` - electricity price in EUR per MWh
+
+### Dataset period
+
+The dataset contains hourly observations collected from July to September 2022.
+
+### Source
+
+Data obtained from the European electricity market.
