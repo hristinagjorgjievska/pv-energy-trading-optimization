@@ -13,7 +13,8 @@ The dataset includes measurements and estimates related to solar energy producti
 - `H_sun` - sun height above the horizon (degrees)
 - `T2m` - air temperature at 2 meters (°C)
 - `WS10m` - wind speed at 10 meters (m/s)
-- 
+
+
 ### Dataset period
 
 From January 1, 2022 to December 31, 2022, with hourly observations.
