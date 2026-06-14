@@ -1,5 +1,5 @@
 # 1. PVGIS-GERMANY-2020 DATASET
-## About the datasets
+## About the dataset
 
 This dataset contains hourly solar power production and weather data for Germany during 2022. The data was generated using PVGIS for a location at latitude 51.0° and longitude 10.0°, which is roughly in the central part of Germany.
 
