@@ -1,5 +1,0 @@
-The LSTM model was not evaluated due to the limited dataset
-(3 months and around 1,400 training samples), which is
-insufficient for learning long-term temporal dependencies.
-It remains a candidate for future experiments when the
-dataset is expanded to cover a longer time period and multiple countries.
