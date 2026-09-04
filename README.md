@@ -84,5 +84,3 @@ The evaluation pipeline consists of:
 3. Generating future price and PV production predictions.
 4. Applying battery optimization algorithms.
 5. Comparing obtained revenues and performance metrics.
-
-# Main Project 
