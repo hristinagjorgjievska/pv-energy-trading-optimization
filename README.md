@@ -1,88 +1,91 @@
 # AI-Driven Forecasting and Optimization of Photovoltaic Energy Storage and Market Selling Strategies in European Electricity Markets
 
-**Course:** Introduction to Data Science  
+**Предмет:** Вовед во науката за податоци
 
-**Authors:**  
-- Hristina Gjorgjievska 
-- Ognen Mladenovski
+**Автори:**  
+- Христина Ѓорѓиевска
+- Огнен Младеновски
 
 ---
 
-## Overview
+## Преглед
 
-This project explores the application of machine learning techniques for forecasting photovoltaic (PV) energy production and optimizing energy storage and market selling strategies in European electricity markets. By combining historical electricity prices, weather conditions, and solar irradiation data, the project evaluates predictive models and analyzes how accurate forecasts can support more efficient energy management and market participation.
+Овој проект ја истражува примената на техники од машинското учење за предвидување на производството на фотоволтаична (PV) енергија и оптимизација на стратегиите за складирање и продажба на енергија на европските пазари на електрична енергија.
 
-## Experiments
+Со комбинирање на историски податоци за цените на електричната енергија, временските услови и податоците за сончевото зрачење, проектот ги оценува предиктивните модели и анализира како прецизните предвидувања можат да придонесат за поефикасно управување со енергијата и поефикасно учество на пазарот.
 
-The experimental evaluation was conducted to validate the proposed AI-based forecasting and optimization framework. 
-The experiments are divided into four main research questions:
+## Експерименти
 
-### RQ1: Electricity Price Forecasting
+Експерименталната евалуација беше спроведена со цел да се потврди предложената рамка за предвидување и оптимизација базирана на вештачка интелигенција.
 
-The goal of this experiment is to evaluate how accurately future electricity prices can be predicted using historical market data, meteorological variables, and photovoltaic-related features.
+Експериментите се поделени во четири главни истражувачки прашања:
 
-Experiments include:
-- Training and evaluation of machine learning forecasting models.
-- Comparison of different feature configurations.
-- Evaluation using regression metrics:
-  - MAE
-  - RMSE
-  - R² score
+### RQ1: Предвидување на цената на електричната енергија
 
-The best-performing model is used to generate future electricity price predictions required for the optimization stage.
+Целта на овој експеримент е да се процени колку прецизно можат да се предвидат идните цени на електричната енергија со користење на историски пазарни податоци, метеоролошки променливи и карактеристики поврзани со фотоволтаичното производство.
 
+Експериментите опфаќаат:
 
-### RQ2: Photovoltaic Production Forecasting
+  - Обука и евалуација на модели за предвидување.
+  - Споредба на различни конфигурации на карактеристики.
+  - Евалуација со користење на регресиски метрики:
+    - MAE
+    - RMSE
+    - R²
 
-This experiment evaluates the ability to predict photovoltaic energy production based on weather conditions and solar radiation measurements.
+### RQ2: Предвидување на фотоволтаичното производство
 
-Experiments include:
-- Feature analysis of meteorological and solar radiation variables.
-- Evaluation of forecasting approaches:
-  - Machine learning models
-  - Persistence baseline
+Овој експеримент ја оценува способноста за предвидување на производството на фотоволтаична енергија врз основа на временски услови и мерења на сончевото зрачење.
 
-The selected forecasting method provides estimated PV production values used as input for battery scheduling.
+Експериментите опфаќаат:
 
+  - Анализа на карактеристиките поврзани со метеоролошките услови и сончевото зрачење.
+  - Евалуација на пристапи за предвидување:
+    - Модели на машинско учење
+    - Persistence baseline
 
-### RQ3: Battery Storage Optimization
-
-The objective of this experiment is to determine the optimal battery charging and discharging strategy that maximizes electricity trading revenue.
-
-The optimization considers:
-- Predicted electricity prices
-- Predicted PV production
-- Battery constraints:
-  - Maximum/minimum state of charge
-  - Charging/discharging limits
-  - Battery efficiency
-
-The following strategies are compared:
-- Rule-based strategy
-- Model Predictive Control (MPC)
-- Perfect foresight scenario (upper bound)
+Избраниот метод за предвидување обезбедува проценети вредности за PV производството, кои се користат како влезни податоци за распоредување на работата на батеријата.
 
 
-### RQ4: Uncertainty Analysis
+### RQ3: Оптимизација на складирањето на енергија во батерија
 
-This experiment investigates how prediction errors influence the final battery scheduling strategy and achieved revenue.
+Целта на овој експеримент е да се одреди оптималната стратегија за полнење и празнење на батеријата со која се максимизира приходот од тргувањето со електрична енергија.
 
-The analysis evaluates:
-- Sensitivity of optimization results to forecasting errors.
-- Impact of inaccurate price and PV production predictions.
-- Difference between ideal and realistic forecasting scenarios.
+При оптимизацијата се земаат предвид:
+
+  - Предвидените цени на електричната енергија
+  - Предвиденото PV производство
+  - Ограничувањата на батеријата:
+    - Минимално и максимално ниво на наполнетост (State of Charge)
+    - Ограничувања на брзината на полнење и празнење
+    - Ефикасност на батеријата
+
+Се споредуваат следните стратегии:
+
+  - Стратегија базирана на правила
+  - Model Predictive Control (MPC)
+  - Сценарио со совршено предвидување (Perfect Foresight) како горна граница
 
 
-### Experimental Setup
+### RQ4: Анализа на неизвесност
 
-All experiments are performed using chronological train-validation-test splitting to avoid data leakage.
+Овој експеримент истражува како грешките во предвидувањата влијаат врз финалната стратегија за распоредување на батеријата и остварениот приход.
 
-The evaluation pipeline consists of:
+Анализата ги оценува:
 
-1. Data preprocessing and feature engineering.
-2. Training forecasting models.
-3. Generating future price and PV production predictions.
-4. Applying battery optimization algorithms.
-5. Comparing obtained revenues and performance metrics.
+  - Чувствителноста на резултатите од оптимизацијата на грешките при предвидување.
+  - Влијанието на неточните предвидувања на цените и PV производството.
+  - Разликата помеѓу идеалните и реалните сценарија на предвидување.
 
-# Main Project - Test22
+
+### Експериментална поставеност
+
+Сите експерименти се изведуваат со користење на хронолошка поделба на податоците на train-validation-test множества, со цел да се избегне протекување на информации (data leakage).
+
+Процесот на евалуација се состои од:
+
+1. Претпроцесирање на податоците и инженеринг на карактеристики.
+2. Обука на моделите за предвидување.
+3. Генерирање на предвидувања за идните цени на електричната енергија и PV производството.
+4. Примена на алгоритми за оптимизација на батеријата.
+5. Споредба на остварените приходи и перформансите на моделите.
