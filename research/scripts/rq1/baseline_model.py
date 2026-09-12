@@ -5,7 +5,7 @@ COUNTRIES = ["spain", "greece", "netherlands", "poland", "sweden", "germany"]
 all_results = {}
 
 for country in COUNTRIES:
-    df = pd.read_csv(f"../data/processed/fe/{country}_features.csv")
+    df = pd.read_csv(f"../../data/processed/fe/{country}_features.csv")
 
     train_end = int(len(df) * 0.7)
     val_end = int(len(df) * 0.85)
@@ -14,6 +14,7 @@ for country in COUNTRIES:
     results = []
     for h in range(1, 25):
         y_true = test[f"target_h{h}"]
+
         y_pred = test["Price (EUR/MWhe)"]
 
         mae = mean_absolute_error(y_true, y_pred)
@@ -25,7 +26,7 @@ for country in COUNTRIES:
     all_results[country] = pd.DataFrame(results)
 
     all_results[country].to_csv(
-        f"../results/baseline_model/{country}_results.csv"
+        f"../../results/rq1-results/baseline_model/{country}_results.csv"
     )
 
     print(f"\n{country}")

@@ -11,7 +11,8 @@ all_results = {}
 
 if __name__ == "__main__":
     for country in COUNTRIES:
-        df = pd.read_csv(f"../data/processed/fe/{country}_features.csv")
+        pl.seed_everything(42, workers=True)
+        df = pd.read_csv(f"{country}_features.csv")
         df["time_idx"] = np.arange(len(df))
         df["group"] = country
 
@@ -41,10 +42,14 @@ if __name__ == "__main__":
             time_varying_unknown_reals=[target] + features,
         )
 
-        validation = TimeSeriesDataSet.from_dataset(training, df, predict=True, stop_randomization=True)
+        test_data = df[lambda x: x.time_idx > training_cutoff - max_encoder_length]
 
-        train_dataloader = training.to_dataloader(train=True, batch_size=64, num_workers=4)
-        val_dataloader = validation.to_dataloader(train=False, batch_size=64, num_workers=4)
+        validation = TimeSeriesDataSet.from_dataset(
+            training, test_data, predict=False, stop_randomization=True
+        )
+
+        train_dataloader = training.to_dataloader(train=True, batch_size=64, num_workers=2)
+        val_dataloader = validation.to_dataloader(train=False, batch_size=64, num_workers=2)
 
         tft = TemporalFusionTransformer.from_dataset(
             training,
@@ -55,7 +60,7 @@ if __name__ == "__main__":
             loss=QuantileLoss(),
         )
 
-        trainer = pl.Trainer(max_epochs=20, accelerator="cpu", gradient_clip_val=0.1)
+        trainer = pl.Trainer(max_epochs=20, accelerator="gpu", gradient_clip_val=0.1)
         trainer.fit(tft, train_dataloaders=train_dataloader, val_dataloaders=val_dataloader)
 
         predictions = tft.predict(val_dataloader, mode="prediction")
@@ -71,6 +76,8 @@ if __name__ == "__main__":
         print(f"{country}: MAE={mae:.2f}, RMSE={rmse:.2f}, R2={r2*100:.1f}%")
         all_results[country] = {"MAE": mae, "RMSE": rmse, "R2": r2 * 100}
 
+        pd.DataFrame([{"MAE": mae, "RMSE": rmse, "R2": r2 * 100}]).to_csv(f"tft_{country}.csv", index=False)
+
         results_df = pd.DataFrame(all_results).T
-        results_df.to_csv("../results/tft_model/tft_model.csv")
+        results_df.to_csv("tft_model.csv")
         print(results_df)

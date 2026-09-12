@@ -3,7 +3,7 @@ import pandas as pd
 COUNTRIES = ["spain", "greece", "netherlands", "poland", "sweden", "germany"]
 
 for country in COUNTRIES:
-    df = pd.read_csv(f"../data/processed/{country}_merged.csv")
+    df = pd.read_csv(f"../data/processed/merged/{country}_merged.csv")
 
     df["datetime"] = pd.to_datetime(df["datetime"])
     df = df.sort_values("datetime").reset_index(drop=True)
@@ -23,6 +23,7 @@ for country in COUNTRIES:
 
     for h in range(1, 25):
         df[f"target_h{h}"] = df["Price (EUR/MWhe)"].shift(-h)
+        df[f"target_pv_h{h}"] = df["solar_generation_MW"].shift(-h)
 
     df = df.dropna().reset_index(drop=True)
 

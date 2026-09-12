@@ -1,0 +1,79 @@
+--- spain ---
+price scale -30%: revenue = 1404872.04 EUR (53.5s)
+price scale -20%: revenue = 1427216.61 EUR (51.1s)
+price scale -10%: revenue = 1447536.38 EUR (47.4s)
+price scale +10%: revenue = 1436617.95 EUR (45.2s)
+price scale +20%: revenue = 1386088.59 EUR (46.3s)
+price scale +30%: revenue = 1356260.49 EUR (46.0s)
+--- greece ---
+price scale -30%: revenue = 407038.74 EUR (45.9s)
+price scale -20%: revenue = 418683.07 EUR (45.2s)
+price scale -10%: revenue = 423920.14 EUR (46.0s)
+price scale +10%: revenue = 419380.68 EUR (44.6s)
+price scale +20%: revenue = 403167.73 EUR (46.4s)
+price scale +30%: revenue = 392507.43 EUR (45.4s)
+--- netherlands ---
+price scale -30%: revenue = 17143.27 EUR (45.3s)
+price scale -20%: revenue = 17608.20 EUR (46.7s)
+price scale -10%: revenue = 17841.81 EUR (45.8s)
+price scale +10%: revenue = 17687.22 EUR (47.9s)
+price scale +20%: revenue = 17301.85 EUR (48.7s)
+price scale +30%: revenue = 16871.60 EUR (47.1s)
+--- poland ---
+price scale -30%: revenue = 830840.93 EUR (47.1s)
+price scale -20%: revenue = 845017.45 EUR (45.8s)
+price scale -10%: revenue = 859103.25 EUR (46.9s)
+price scale +10%: revenue = 854537.67 EUR (46.0s)
+price scale +20%: revenue = 837455.82 EUR (46.6s)
+price scale +30%: revenue = 824360.12 EUR (46.4s)
+--- sweden ---
+price scale -30%: revenue = 23571.53 EUR (45.4s)
+price scale -20%: revenue = 23741.31 EUR (46.1s)
+price scale -10%: revenue = 23984.87 EUR (46.0s)
+price scale +10%: revenue = 23981.53 EUR (46.5s)
+price scale +20%: revenue = 23575.83 EUR (44.9s)
+price scale +30%: revenue = 23334.08 EUR (46.2s)
+--- germany ---
+price scale -30%: revenue = 2198609.39 EUR (44.8s)
+price scale -20%: revenue = 2249049.49 EUR (45.7s)
+price scale -10%: revenue = 2281164.86 EUR (45.4s)
+price scale +10%: revenue = 2265095.83 EUR (45.2s)
+price scale +20%: revenue = 2216203.52 EUR (45.3s)
+price scale +30%: revenue = 2157183.47 EUR (45.1s)
+        country  scale       revenue
+0         spain   -0.3  1.404872e+06
+1         spain   -0.2  1.427217e+06
+2         spain   -0.1  1.447536e+06
+3         spain    0.1  1.436618e+06
+4         spain    0.2  1.386089e+06
+5         spain    0.3  1.356260e+06
+6        greece   -0.3  4.070387e+05
+7        greece   -0.2  4.186831e+05
+8        greece   -0.1  4.239201e+05
+9        greece    0.1  4.193807e+05
+10       greece    0.2  4.031677e+05
+11       greece    0.3  3.925074e+05
+12  netherlands   -0.3  1.714327e+04
+13  netherlands   -0.2  1.760820e+04
+14  netherlands   -0.1  1.784181e+04
+15  netherlands    0.1  1.768722e+04
+16  netherlands    0.2  1.730185e+04
+17  netherlands    0.3  1.687160e+04
+18       poland   -0.3  8.308409e+05
+19       poland   -0.2  8.450174e+05
+20       poland   -0.1  8.591033e+05
+21       poland    0.1  8.545377e+05
+22       poland    0.2  8.374558e+05
+23       poland    0.3  8.243601e+05
+24       sweden   -0.3  2.357153e+04
+25       sweden   -0.2  2.374131e+04
+26       sweden   -0.1  2.398487e+04
+27       sweden    0.1  2.398153e+04
+28       sweden    0.2  2.357583e+04
+29       sweden    0.3  2.333408e+04
+30      germany   -0.3  2.198609e+06
+31      germany   -0.2  2.249049e+06
+32      germany   -0.1  2.281165e+06
+33      germany    0.1  2.265096e+06
+34      germany    0.2  2.216204e+06
+35      germany    0.3  2.157183e+06

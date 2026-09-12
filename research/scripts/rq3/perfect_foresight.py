@@ -25,11 +25,15 @@ def solve_window(prices, productions, soc, max_soc, min_soc, max_rate):
     prob.solve(pulp.PULP_CBC_CMD(msg=0))
     return sell[0].varValue, charge[0].varValue, discharge[0].varValue
 
+results = {}
+
 for country in COUNTRIES:
     df = pd.read_csv(f"inputs/rq3_inputs_{country}.csv")
 
-    avg_production = df['actual_P'].mean()
-    CAPACITY = avg_production * 2
+    fe = pd.read_csv(f"../../data/processed/fe/{country}_features.csv")
+    train_end = int(len(fe) * 0.7)
+    train_avg_production = fe['solar_generation_MW'].iloc[:train_end].mean()
+    CAPACITY = train_avg_production * 2
     MIN_SOC = CAPACITY * 0.1
     MAX_SOC = CAPACITY * 0.9
     MAX_RATE = CAPACITY * 0.4
@@ -57,4 +61,7 @@ for country in COUNTRIES:
         revenue += real_price * (actual_sell + actual_discharge * EFFICIENCY) / 1000
         soc = soc + actual_charge * EFFICIENCY - actual_discharge
 
-    print(f"{country}: Perfect Foresight revenue = {revenue:.2f} EUR")
+    print(f"{country}: capacity={CAPACITY:.0f}, Perfect Foresight revenue = {revenue:.2f} EUR")
+    results[country] = {"capacity": CAPACITY, "revenue": revenue}
+
+pd.DataFrame(results).T.to_csv("../../results/rq3-results/perfect_foresight_results.csv")

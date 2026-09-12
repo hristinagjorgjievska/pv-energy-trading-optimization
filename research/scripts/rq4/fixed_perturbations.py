@@ -1,3 +1,6 @@
+import time
+
+import numpy as np
 import pandas as pd
 import pulp
 
@@ -5,6 +8,7 @@ COUNTRIES = ["spain", "greece", "netherlands", "poland", "sweden", "germany"]
 EFFICIENCY = 0.95
 HORIZON = 24
 SCALES = [-0.30, -0.20, -0.10, 0.10, 0.20, 0.30]
+
 
 def solve_window(prices, productions, soc, max_soc, min_soc, max_rate):
     H = len(prices)
@@ -16,20 +20,25 @@ def solve_window(prices, productions, soc, max_soc, min_soc, max_rate):
     prob += pulp.lpSum(prices[t] * (sell[t] + discharge[t] * EFFICIENCY) for t in range(H))
     for t in range(H):
         prob += sell[t] + charge[t] == productions[t]
-        prev_soc = soc if t == 0 else battery[t-1]
+        prev_soc = soc if t == 0 else battery[t - 1]
         prob += battery[t] == prev_soc + charge[t] * EFFICIENCY - discharge[t]
     prob.solve(pulp.PULP_CBC_CMD(msg=0))
     return sell[0].varValue, charge[0].varValue, discharge[0].varValue
 
-def run_mpc(prices, productions, actual_prices, actual_P, max_soc, min_soc, max_rate):
+
+def run_mpc(actual_prices, actual_P, price_h, pv_h, max_soc, min_soc, max_rate):
+    n = len(actual_prices)
     soc = min_soc
     revenue = 0
-    n = len(prices)
     for t in range(n):
-        end = min(t + HORIZON, n)
-        sell, charge, discharge = solve_window(
-            prices[t:end], productions[t:end], soc, max_soc, min_soc, max_rate
-        )
+        remaining = min(HORIZON, n - t)
+        future_prices = price_h[t, :remaining - 1]
+        future_prod = pv_h[t, :remaining - 1]
+        window_prices = [actual_prices[t]] + list(future_prices)
+        window_prod = [actual_P[t]] + list(future_prod)
+
+        sell, charge, discharge = solve_window(window_prices, window_prod, soc, max_soc, min_soc, max_rate)
+
         real_price = actual_prices[t]
         real_production = actual_P[t]
         actual_sell = min(sell, real_production)
@@ -41,22 +50,33 @@ def run_mpc(prices, productions, actual_prices, actual_P, max_soc, min_soc, max_
         soc = soc + actual_charge * EFFICIENCY - actual_discharge
     return revenue
 
-for country in COUNTRIES:
-    df = pd.read_csv(f"../../scripts/rq3/inputs/rq3_inputs_{country}.csv")
 
-    avg_production = df['actual_P'].mean()
-    CAPACITY = avg_production * 2
+all_rows = []
+
+for country in COUNTRIES:
+    df = pd.read_csv(f"../rq3/inputs/rq3_inputs_{country}.csv")
+
+    fe = pd.read_csv(f"../../data/processed/fe/{country}_features.csv")
+    train_end = int(len(fe) * 0.7)
+    train_avg_production = fe['solar_generation_MW'].iloc[:train_end].mean()
+    CAPACITY = train_avg_production * 2
     MIN_SOC = CAPACITY * 0.1
     MAX_SOC = CAPACITY * 0.9
     MAX_RATE = CAPACITY * 0.4
 
-    predicted_prices = df['predicted_price'].values
-    predicted_P = df['predicted_P'].values
     actual_prices = df['actual_price'].values
     actual_P = df['actual_P'].values
+    price_h = df[[f'predicted_price_h{h}' for h in range(1, HORIZON)]].values
+    pv_h = df[[f'predicted_P_h{h}' for h in range(1, HORIZON)]].values
 
     print(f"--- {country} ---")
     for scale in SCALES:
-        scaled_prices = predicted_prices * (1 + scale)
-        revenue = run_mpc(scaled_prices, predicted_P, actual_prices, actual_P, MAX_SOC, MIN_SOC, MAX_RATE)
-        print(f"price scale {scale*100:+.0f}%: revenue = {revenue:.2f} EUR")
+        start = time.time()
+        scaled_price_h = price_h * (1 + scale)
+        revenue = run_mpc(actual_prices, actual_P, scaled_price_h, pv_h, MAX_SOC, MIN_SOC, MAX_RATE)
+        print(f"price scale {scale * 100:+.0f}%: revenue = {revenue:.2f} EUR ({time.time() - start:.1f}s)")
+        all_rows.append({"country": country, "scale": scale, "revenue": revenue})
+
+result_df = pd.DataFrame(all_rows)
+result_df.to_csv("../../results/rq4-results/fixed_perturbations_results.csv", index=False)
+print(result_df)

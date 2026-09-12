@@ -15,23 +15,6 @@ COUNTRY_ZONES = {
     "SE": "SE_3",
 }
 
-# def fetch_solar_generation(country: str, start: str, end: str) -> pd.Series:
-#     zone = COUNTRY_ZONES[country]
-#     ts_start = pd.Timestamp(start, tz="UTC")
-#     ts_end = pd.Timestamp(end, tz="UTC")
-#
-#     generation = client.query_generation(
-#         zone, start=ts_start, end=ts_end, psr_type="B16"
-#     )
-#
-#     if isinstance(generation.columns, pd.MultiIndex):
-#         solar = generation[("Solar", "Actual Aggregated")]
-#     else:
-#         solar = generation.iloc[:, 0]
-#
-#     solar_hourly = solar.resample("1h").mean()
-#     return solar_hourly
-
 import time
 
 def fetch_solar_generation(country: str, start: str, end: str, max_retries=3) -> pd.Series:
