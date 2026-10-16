@@ -30,7 +30,7 @@
 
 * **Предвидување (RQ1, RQ2):** Persistence baseline, XGBoost, LSTM, Temporal Fusion Transformer
 * **Оптимизација (RQ3):** Rule-based, Model Predictive Control (Linear Programming), Perfect Foresight
-* **Неизвесност (RQ4):** Monte Carlo симулации, fixed perturbations, регимска анализа
+* **Неизвесност (RQ4):** Monte Carlo симулации, fixed perturbations, анализа по режими
 
 ---
 
